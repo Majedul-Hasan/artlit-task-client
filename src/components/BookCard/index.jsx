@@ -20,6 +20,7 @@ export function BookCard({
   ratings,
   genre,
   year,
+  link,
 }) {
   return (
     <Card className='w-full max-w-[26rem] shadow-lg'>
@@ -50,7 +51,7 @@ export function BookCard({
             variant='h5'
             color='blue-gray'
             className='font-medium'>
-            <Link to={'/'}>{title}</Link>
+            <Link to={link}>{title}</Link>
           </Typography>
           <Typography
             color='blue-gray'
@@ -73,7 +74,7 @@ export function BookCard({
           <div className='group my1  inline-flex flex-wrap items-center gap-3'>
             year:
             <span className='cursor-pointer   p-3 text-gray-900 transition-colors hover:border-gray-900/10 hover:bg-gray-900/10 hover:!opacity-100 group-hover:opacity-70'>
-              <Link to='/'>{year} </Link>
+              <Link to={'/'}>{year} </Link>
             </span>
           </div>
         </div>

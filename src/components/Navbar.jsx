@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Navbar,
   MobileNav,
@@ -8,15 +8,28 @@ import {
 } from '@material-tailwind/react';
 
 import NavList from './navList';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { createBrowserHistory } from 'history';
 
 export function PublicNavbar() {
   const [openNav, setOpenNav] = React.useState(false);
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
   const closeMenu = () => setIsMenuOpen(false);
+  const [user, setUser] = useState({});
+  let {
+    location: { pathname },
+  } = createBrowserHistory();
 
-  React.useEffect(() => {
+  console.log(pathname);
+
+  useEffect(() => {
+    setUser(JSON.parse(localStorage.getItem('user')));
+  }, [pathname]);
+
+  // console.log(user);
+
+  useEffect(() => {
     window.addEventListener(
       'resize',
       () => window.innerWidth >= 960 && setOpenNav(false)
@@ -26,35 +39,52 @@ export function PublicNavbar() {
   const navigationHandler = (to) => {
     navigate(to);
   };
+  const handleLogOut = () => {
+    localStorage.removeItem('user');
+    navigate('/signup');
+  };
 
   return (
     <nav className='mt-0  '>
       <Navbar className='sticky top-0 z-10 h-max max-w-full rounded-none px-4 py-2 lg:px-8 lg:py-4'>
         <div className='flex items-center justify-between text-blue-gray-900'>
           <Typography
-            as='a'
-            href='#'
+            as={Link}
+            to='/'
             className='mr-4 cursor-pointer py-1.5 font-medium'>
             ARTLIT
           </Typography>
           <div className='flex items-center gap-4'>
             <NavList />
-            <div className='flex items-center gap-x-1'>
-              <Button
-                onClick={() => navigationHandler('/login')}
-                variant='text'
-                size='sm'
-                className='hidden lg:inline-block'>
-                <span>Log In</span>
-              </Button>
-              <Button
-                onClick={() => navigationHandler('/signup')}
-                variant='gradient'
-                size='sm'
-                className='hidden lg:inline-block'>
-                <span>Sign in</span>
-              </Button>
-            </div>
+            {user?.email ? (
+              <div className='flex items-center gap-x-1'>
+                <Button
+                  onClick={() => handleLogOut('/login')}
+                  variant='text'
+                  size='sm'
+                  className='lg:inline-block'>
+                  <span>Log out</span>
+                </Button>
+              </div>
+            ) : (
+              <div className='flex items-center gap-x-1'>
+                <Button
+                  onClick={() => navigationHandler('/login')}
+                  variant='text'
+                  size='sm'
+                  className='hidden lg:inline-block'>
+                  <span>Log In</span>
+                </Button>
+                <Button
+                  onClick={() => navigationHandler('/signup')}
+                  variant='gradient'
+                  size='sm'
+                  className='hidden lg:inline-block'>
+                  <span>Sign in</span>
+                </Button>
+              </div>
+            )}
+
             <IconButton
               variant='text'
               className='ml-auto h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden'

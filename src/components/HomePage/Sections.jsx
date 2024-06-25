@@ -1,11 +1,11 @@
 import Tabs from './Tabs';
 
-const Sections = ({ children }) => {
+const Sections = ({ children, data }) => {
   return (
     <div>
       <div className='container pt-3'>
         <div className='tab'>
-          <Tabs>{children}</Tabs>
+          <Tabs data={data}>{children}</Tabs>
         </div>
       </div>
       ;
