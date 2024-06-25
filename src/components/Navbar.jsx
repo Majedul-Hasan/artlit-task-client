@@ -8,6 +8,7 @@ import {
 } from '@material-tailwind/react';
 
 import NavList from './navList';
+import { useNavigate } from 'react-router-dom';
 
 export function PublicNavbar() {
   const [openNav, setOpenNav] = React.useState(false);
@@ -21,6 +22,10 @@ export function PublicNavbar() {
       () => window.innerWidth >= 960 && setOpenNav(false)
     );
   }, []);
+  const navigate = useNavigate();
+  const navigationHandler = (to) => {
+    navigate(to);
+  };
 
   return (
     <nav className='mt-0  '>
@@ -36,12 +41,14 @@ export function PublicNavbar() {
             <NavList />
             <div className='flex items-center gap-x-1'>
               <Button
+                onClick={() => navigationHandler('/login')}
                 variant='text'
                 size='sm'
                 className='hidden lg:inline-block'>
                 <span>Log In</span>
               </Button>
               <Button
+                onClick={() => navigationHandler('/signup')}
                 variant='gradient'
                 size='sm'
                 className='hidden lg:inline-block'>

@@ -12,30 +12,39 @@ import { useState } from 'react';
 const navListMenuItems = [
   {
     title: 'Noble',
+    link: '/Noble',
   },
   {
     title: 'SCIENCE',
+    link: '/SCIENCE',
   },
   {
     title: 'SCI-fi',
+    link: '/SCI-fi',
   },
   {
     title: 'Historical ',
+    link: '/Historical ',
   },
   {
     title: 'Horror ',
+    link: '/Horror ',
   },
   {
     title: 'Romance ',
+    link: '/Romance ',
   },
   {
     title: "Children's Fiction ",
+    link: "/Children's Fiction ",
   },
   {
     title: 'Biography',
+    link: '/Biography',
   },
   {
     title: 'Autobiography',
+    link: '/Autobiography',
   },
 ];
 
@@ -106,28 +115,6 @@ const NavList = ({ open }) => {
             <ul className='flex w-full flex-col gap-1'>{renderItems}</ul>
           </MenuList>
 
-          <Typography
-            as='li'
-            variant='small'
-            color='blue-gray'
-            className='p-1 font-normal'>
-            <a
-              href='#'
-              className='flex items-center'>
-              Blocks
-            </a>
-          </Typography>
-          <Typography
-            as='li'
-            variant='small'
-            color='blue-gray'
-            className='p-1 font-normal'>
-            <a
-              href='#'
-              className='flex items-center'>
-              Docs
-            </a>
-          </Typography>
         </ul>
       </Menu>
     </div>
